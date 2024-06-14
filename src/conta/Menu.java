@@ -1,6 +1,8 @@
 package conta;
 
 import conta.model.Conta;
+import conta.model.ContaCorrente;
+import conta.model.ContaPoupanca;
 import conta.util.Cores;
 import java.util.Scanner;
 
@@ -8,15 +10,30 @@ public class Menu {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
 
-
-        Conta c1 = new Conta(1, 123, 1, "Gustavo", 5000.0f);
-        c1.visualizar();
-        c1.sacar(12000.0f);
-        c1.visualizar();
-        c1.deposito(5000.0f);
-        c1.visualizar();
-
         int opcao;
+
+        ContaPoupanca c1 = new ContaPoupanca(1, 123, 1, "Gustavo", 5000,100);
+        c1.visualizar();
+        c1.sacar(12000);
+        c1.visualizar();
+        c1.deposito(5000);
+        c1.visualizar();
+
+        ContaCorrente cc1 = new ContaCorrente(2,123,1,"Yuri", 15000,1000);
+        cc1.visualizar();
+        cc1.sacar(16000);
+        cc1.visualizar();
+        cc1.deposito(5000);
+        cc1.visualizar();
+
+        ContaPoupanca cp1 = new ContaPoupanca(3,123,2,"Camilla", 100000,15);
+        cp1.visualizar();
+        cp1.sacar(1000);
+        cp1.visualizar();
+        cp1.deposito(5000);
+        cp1.visualizar();
+
+
 
         while (true) {
 
