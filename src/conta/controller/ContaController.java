@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class ContaController implements ContaRepository {
 
+    private int numero;
     private ArrayList<Conta> listaContas = new ArrayList<>();
 
     @Override
@@ -51,7 +52,6 @@ public class ContaController implements ContaRepository {
 
     }
     public int gerarNumero(){
-        int numero = 0;
         return ++numero;
     }
 }

@@ -2,7 +2,6 @@ package conta;
 
 import conta.controller.ContaController;
 import conta.model.ContaCorrente;
-import conta.model.ContaPoupanca;
 import conta.util.Cores;
 import java.io.IOException;
 import java.util.InputMismatchException;
@@ -20,20 +19,6 @@ public class Menu {
         String titular;
         float saldo, limite;
 
-       /* ContaCorrente cc1 = new ContaCorrente(2,123,1,"Yuri", 15000,1000);
-        cc1.visualizar();
-        cc1.sacar(16000);
-        cc1.visualizar();
-        cc1.deposito(5000);
-        cc1.visualizar();
-
-        ContaPoupanca cp1 = new ContaPoupanca(3,123,2,"Camilla", 100000,15);
-        cp1.visualizar();
-        cp1.sacar(1000);
-        cp1.visualizar();
-        cp1.deposito(5000);
-        cp1.visualizar(); */
-
         while (true) {
 
             System.out.println(Cores.TEXT_YELLOW + Cores.ANSI_BLACK_BACKGROUND);
@@ -41,6 +26,7 @@ public class Menu {
 *****************************************************
 
             BANCO DO BRAZIL COM Z
+            
 *****************************************************
 
              1 - Criar Conta
@@ -51,7 +37,8 @@ public class Menu {
              6 - Sacar
              7 - Depositar
              8 - Transferir valores entre Contas
-             9 - Sair""");
+             9 - Sair
+             """);
             System.out.println("Entre com a opção desejada:");
             System.out.print(Cores.TEXT_RESET);
 
@@ -83,7 +70,7 @@ public class Menu {
                     do {
                         System.out.print("Digite o tipo de Conta (1-Corrente ou 2-Poupança):");
                         tipo = scan.nextInt();
-                    }while (tipo < 1 && tipo > 2);
+                    }while (tipo < 1 || tipo > 2);
 
                     System.out.print("Digite o saldo da conta (R$): ");
                     saldo = scan.nextFloat();
