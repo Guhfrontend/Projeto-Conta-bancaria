@@ -1,25 +1,26 @@
 package conta;
 
-import conta.model.Conta;
+import conta.controller.ContaController;
 import conta.model.ContaCorrente;
 import conta.model.ContaPoupanca;
 import conta.util.Cores;
+import java.io.IOException;
+import java.util.InputMismatchException;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Menu {
     public static void main(String[] args) {
+        Locale.setDefault(Locale.US);
         Scanner scan = new Scanner(System.in);
 
-        int opcao;
+        ContaController contas = new ContaController();
 
-        ContaPoupanca c1 = new ContaPoupanca(1, 123, 1, "Gustavo", 5000,100);
-        c1.visualizar();
-        c1.sacar(12000);
-        c1.visualizar();
-        c1.deposito(5000);
-        c1.visualizar();
+        int opcao, numero, agencia, tipo, aniversario;
+        String titular;
+        float saldo, limite;
 
-        ContaCorrente cc1 = new ContaCorrente(2,123,1,"Yuri", 15000,1000);
+       /* ContaCorrente cc1 = new ContaCorrente(2,123,1,"Yuri", 15000,1000);
         cc1.visualizar();
         cc1.sacar(16000);
         cc1.visualizar();
@@ -31,9 +32,7 @@ public class Menu {
         cp1.sacar(1000);
         cp1.visualizar();
         cp1.deposito(5000);
-        cp1.visualizar();
-
-
+        cp1.visualizar(); */
 
         while (true) {
 
@@ -53,9 +52,16 @@ public class Menu {
              7 - Depositar
              8 - Transferir valores entre Contas
              9 - Sair""");
-
             System.out.println("Entre com a opção desejada:");
-            opcao = scan.nextInt();
+            System.out.print(Cores.TEXT_RESET);
+
+            try {
+                opcao = scan.nextInt();
+            }catch(InputMismatchException e){
+                System.out.println("\nDigite valores inteiros!");
+                scan.nextLine();
+                opcao=0;
+            }
 
             if (opcao == 9) {
                 System.out.println(Cores.TEXT_WHITE_BOLD +"\nBanco do Brazil com Z - O seu Futuro começa aqui!");
@@ -66,39 +72,68 @@ public class Menu {
 
             switch (opcao) {
                 case 1:
-                    System.out.println(Cores.TEXT_WHITE_BOLD +"Criar Conta\n\n");
+                    System.out.println(Cores.TEXT_WHITE_BOLD +"Criar Conta");
 
+                    System.out.print("Digite o Numero da Agência: ");
+                    agencia = scan.nextInt();
+                    System.out.print("Digite o nome do Titular: ");
+                    scan.skip("\\R?");
+                    titular = scan.nextLine();
+
+                    do {
+                        System.out.print("Digite o tipo de Conta (1-Corrente ou 2-Poupança):");
+                        tipo = scan.nextInt();
+                    }while (tipo < 1 && tipo > 2);
+
+                    System.out.print("Digite o saldo da conta (R$): ");
+                    saldo = scan.nextFloat();
+
+
+                    if (tipo == 1){
+                        System.out.print("Digite o limite de crédito (R$): ");
+                        limite = scan.nextFloat();
+                        contas.cadastrar(new ContaCorrente(contas.gerarNumero(), agencia,tipo,titular,saldo,limite));
+                    }if (tipo == 2){
+                    System.out.print("Digite o dia do aniversario da Conta: ");
+                    aniversario = scan.nextInt();
+                    contas.cadastrar(new ContaCorrente(contas.gerarNumero(), agencia,tipo,titular,saldo,aniversario));
+                    }
+
+                    keyPress();
                     break;
+
                 case 2:
                     System.out.println(Cores.TEXT_WHITE_BOLD +"Listar todas as Contas\n\n");
-
+                    contas.listarTodas();
+                    keyPress();
                     break;
                 case 3:
                     System.out.println(Cores.TEXT_WHITE_BOLD +"Consultar dados da Conta - por número\n\n");
-
+                    keyPress();
                     break;
                 case 4:
                     System.out.println(Cores.TEXT_WHITE_BOLD +"Atualizar dados da Conta\n\n");
-
+                    keyPress();
                     break;
                 case 5:
                     System.out.println(Cores.TEXT_WHITE_BOLD +"Apagar a Conta\n\n");
-
+                    keyPress();
                     break;
                 case 6:
                     System.out.println(Cores.TEXT_WHITE_BOLD +"Saque\n\n");
-
+                    keyPress();
                     break;
                 case 7:
                     System.out.println(Cores.TEXT_WHITE_BOLD +"Depósito\n\n");
-
+                    keyPress();
                     break;
                 case 8:
                     System.out.println(Cores.TEXT_WHITE_BOLD +"Transferência entre Contas\n\n");
-
+                    keyPress();
                     break;
                 default:
                     System.out.println(Cores.TEXT_RED_BOLD+"\nOpção Inválida!\n");
+                    keyPress();
                     break;
             }
         }
@@ -111,5 +146,17 @@ public class Menu {
         System.out.println("https://github.com/Guhfrontend/Projeto-Conta-bancaria");
         System.out.println("*********************************************************");
     }
+    public static void keyPress() {
 
+        try {
+
+            System.out.println(Cores.TEXT_RESET + "\n\nPressione Enter para Continuar...");
+            System.in.read();
+
+        } catch (IOException e) {
+
+            System.out.println("Você pressionou uma tecla diferente de enter!");
+
+        }
+    }
 }
