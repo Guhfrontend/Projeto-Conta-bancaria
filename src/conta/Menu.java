@@ -26,19 +26,19 @@ public class Menu {
             System.out.println("""
 *****************************************************
 
-            BANCO DO BRAZIL COM Z
+            League of Banking
             
 *****************************************************
 
-             1 - Criar Conta
-             2 - Listar todas as Contas
-             3 - Buscar Conta por Numero
-             4 - Atualizar Dados da Conta
-             5 - Apagar Conta
-             6 - Sacar
-             7 - Depositar
-             8 - Transferir valores entre Contas
-             9 - Sair
+            1 - Criar Conta
+            2 - Listar todas as Contas
+            3 - Buscar Conta por Numero
+            4 - Atualizar Dados da Conta
+            5 - Apagar Conta
+            6 - Sacar
+            7 - Depositar
+            8 - Transferir valores entre Contas
+            9 - Sair
              """);
             System.out.println("Entre com a opção desejada:");
             System.out.print(Cores.TEXT_RESET);
@@ -52,7 +52,7 @@ public class Menu {
             }
 
             if (opcao == 9) {
-                System.out.println(Cores.TEXT_WHITE_BOLD +"\nBanco do Brazil com Z - O seu Futuro começa aqui!");
+                System.out.println(Cores.TEXT_WHITE_BOLD +"\nLeague of Banking - O melhor está aqui!");
                 sobre();
                 scan.close();
                 System.exit(0);
@@ -136,7 +136,7 @@ public class Menu {
                                 System.out.println("Digite o dia do aniversário da conta: ");
                                 aniversario = scan.nextInt();
 
-                                contas.atualizar(new ContaCorrente(numero, agencia, tipo, titular, saldo, aniversario));
+                                contas.atualizar(new ContaPoupanca(numero, agencia, tipo, titular, saldo, aniversario));
                             }
                             default -> System.out.println("Tipo de conta inválido!");
                         }

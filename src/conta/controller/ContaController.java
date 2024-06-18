@@ -53,7 +53,7 @@ public class ContaController implements ContaRepository {
                 System.out.println("\nA conta numero: " + numero + " foi deletada com sucesso!");
             }
         }else {
-            System.out.println("\nA conta numero: " + numero + "n]ao foi encontrada!");
+            System.out.println("\nA conta numero: " + numero + "não foi encontrada!");
         }
     }
 
